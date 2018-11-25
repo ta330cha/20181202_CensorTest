@@ -10,15 +10,6 @@ class Settings:
         self.MAXSETTINGCHAR = 256
         self.filename = filename
     
-    def __get_pos_setting_line(self, line, setting_name):
-        tt = 0
-        if setting_name in line:
-            while(line[tt] != '='):
-                tt+=1
-            return(tt+2)
-        else:
-            return 0
-    
     def __get_pos_setting(self, lines, setting_name):
         ss = 0
         for line in lines:
@@ -34,7 +25,10 @@ class Settings:
     def __get_setting_var(self, lines, setting_name):
         temp_list = []
         setting_line, setting_pos = self.__get_pos_setting(lines, setting_name)
+        if setting_line != 0 and setting_pos != 0:
+            return 0
         line = lines[setting_line]
+
         for tt in range(setting_pos, self.MAXSETTINGCHAR):
             if line[tt] != '\n':
                 temp_list.append(line[tt])

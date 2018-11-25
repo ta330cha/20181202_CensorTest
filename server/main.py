@@ -1,6 +1,8 @@
 ##!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#---Socket for Server
+
 #Packages
 import socket
 import time
@@ -11,25 +13,25 @@ import ConnClient
 #Libraries
 import Settings
 
-#Load files
-SETTING_FILE = "settings.ini"
+#Settings
+HOSTNAME = '127.0.0.1'
+PORTNUM = 50007
+CLIENTNUM = 1
 
 def main():
-    settings = Settings.Settings(SETTING_FILE)
-    HOSTNAME, PORTNUM, CLIENTNUM = settings.load_settings()
-
-    HOSTNAME = '192.168.11.8'
-    
-    s_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s_socket.bind((HOSTNAME, PORTNUM))
-    s_socket.listen(CLIENTNUM)
-    
-    while (1):
-        conn, addr = s_socket.accept()
-        print("Conneted by {}".format(str(addr)))
-        connClientThread = ConnClient.ConnClient(conn,addr)
-        connClientThread.setDaemon(True)
-        connClientThread.start()    
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind((HOSTNAME, PORTNUM))
+        s.listen(CLIENTNUM)
+        conn, addr = s.accept()
+        temp = True
+        while temp:
+            data = conn.recv(1024)
+            if not data:
+                break
+            else:
+                print('data:{}, addr:{}'.format(data,addr))
+                conn.sendall(b'Received: ' + data)
+                temp = False
 
 if __name__ == '__main__':
     main()
