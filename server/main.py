@@ -14,7 +14,7 @@ import ConnClient
 import Settings
 
 #Settings
-HOSTNAME = '127.0.0.1'
+HOSTNAME = '192.168.11.8'
 PORTNUM = 50007
 CLIENTNUM = 1
 
