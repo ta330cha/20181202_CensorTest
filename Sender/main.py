@@ -8,10 +8,10 @@ import socket
 import sys
 import time
 
-#On Raspi
+#Package for Peripheral devices
 Raspi = False
 if Raspi:
-    import VL53L0X #Package for Peripheral devices
+    import VL53L0X
 
 #Threads
 import threading
