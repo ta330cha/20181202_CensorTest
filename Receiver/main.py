@@ -6,6 +6,7 @@
 #Packages
 import socket
 import time
+import re
 
 #Threads
 import ConnClient
@@ -26,9 +27,8 @@ MaxRepeat = 10
 def thTimer():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((HOSTNAME, PORTNUM))
-        s.listen(CLIENTNUM)
-        conn, addr = s.accept()
-        data = conn.recv(1024)
+        data, addr = s.recvfrom(1024)
+        data = float(data.decode())
         print('data:{}, addr:{}'.format(data,addr))
         t = threading.Timer(Interval, thTimer)
         t.start()

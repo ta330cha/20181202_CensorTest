@@ -40,25 +40,29 @@ if Raspi:
         return(timing/DivCensorTiming)
 
 def initTimer():
-    timing = 1 # getTiming()
+    timing = Interval # getTiming()
     t = threading.Timer(timing, thTimer)
     t.start()
 
 def thTimer():
-    distance = 100 # tof.get_distance()
-
+    if Raspi:
+        distance = tof.get_distance()
+    else:
+        distance = 100
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((HOSTNAME, PORT))
         if(distance > 0):
-            temp = b"%d_mm" % (distance)
+            temp = b"%d" % (distance)
         else:
             temp = b"MISS"
-        s.sendall(temp)
+        s.sendto(temp, (HOSTNAME, PORT))
         print(temp)
     initTimer()
 
 def main():
-    #tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
+    if Raspi:
+        tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
+    else:
+        print("Not Raspi")
     initTimer()
 
 if __name__ == '__main__':
