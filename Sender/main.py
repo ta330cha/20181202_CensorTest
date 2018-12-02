@@ -11,7 +11,7 @@ import time
 #Package for Peripheral devices
 Raspi = False
 if Raspi:
-    import VL53L0X
+    import VL53L0X 
 
 #Threads
 import threading
@@ -47,6 +47,7 @@ def initTimer():
 def thTimer():
     distance = 100 # tof.get_distance()
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((HOSTNAME, PORT))
         if(distance > 0):
             temp = b"%d" % (distance)
         else:
@@ -56,10 +57,7 @@ def thTimer():
     initTimer()
 
 def main():
-    if Raspi:
-        tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
-    else:
-        print("Not Raspi")
+    #tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
     initTimer()
 
 if __name__ == '__main__':
