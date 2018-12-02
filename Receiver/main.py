@@ -1,7 +1,7 @@
 ##!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#---Socket for Server
+#---Socket for Receiver
 
 #Packages
 import socket
@@ -9,12 +9,13 @@ import time
 
 #Threads
 import ConnClient
+import threading
 
 #Libraries
-import Settings
+#import Settings
 
 #Settings
-HOSTNAME = '192.168.11.8'
+HOSTNAME = '192.168.11.5'
 PORTNUM = 50007
 CLIENTNUM = 1
 
