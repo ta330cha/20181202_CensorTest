@@ -47,12 +47,8 @@ def thTimer():
         print(temp)
         print(repr(temp))
     #time.sleep(getTiming())
-    Ct += 1
-    if(Ct < MaxRepeat):
-        t = threading.Timer(Interval, thTimer)
-        t.start()
-    else:
-        print("END")
+    t = threading.Timer(Interval, thTimer)
+    t.start()
 
 def main():
     #tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)

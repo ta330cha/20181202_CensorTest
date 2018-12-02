@@ -31,12 +31,8 @@ def thTimer():
         conn, addr = s.accept()
         data = conn.recv(1024)
         print('data:{}, addr:{}'.format(data,addr))
-    Ct += 1
-    if(Ct < MaxRepeat):
         t = threading.Timer(Interval, thTimer)
         t.start()
-    else:
-        print("END")
 
 def main():
     t = threading.Timer(Interval, thTimer)
