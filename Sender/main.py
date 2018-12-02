@@ -32,7 +32,7 @@ MaxRepeat = 10
 #    return(timing/DivCensorTiming)
 
 def thTimer():
-#    distance = tof.get_distance()
+    distance = 100 # tof.get_distance()
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOSTNAME, PORT))
         if(distance > 0):
