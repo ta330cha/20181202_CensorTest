@@ -7,8 +7,10 @@
 import socket
 import sys
 import time
-import threading
 #import VL53L0X #Package for Peripheral devices
+
+#Threads
+import threading
 
 #Instance for Censor
 # tof = VL53L0X.VL53L0X()
@@ -21,9 +23,10 @@ DivCensorTiming = 1000000.00
 HOSTNAME = "192.168.11.5"
 PORT = 50007
 
-#Settings for Socket
+#Settings for Timer
 Interval = 1
 MaxRepeat = 10
+Ct = 0
 
 #def getTiming():
 #    timing = tof.get_timing()
@@ -44,8 +47,12 @@ def thTimer():
         print(temp)
         print(repr(temp))
     #time.sleep(getTiming())
-    t = threading.Timer(Interval, thTimer)
-    t.start()
+    Ct += 1
+    if(Ct < MaxRepeat):
+        t = threading.Timer(Interval, thTimer)
+        t.start()
+    else:
+        print("END")
 
 def main():
     #tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
