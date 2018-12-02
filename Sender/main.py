@@ -15,6 +15,7 @@ tof = VL53L0X.VL53L0X()
 
 #Settings for Censor
 MaxCensorTiming = 20000
+DivCensorTiming = 1000000.00
 
 #Settings for Socket
 HOSTNAME = "192.168.11.5"
@@ -24,6 +25,12 @@ PORT = 50007
 Interval = 1
 MaxRepeat = 10
 
+def getTiming():
+    timing = tof.get_timing()
+    if(timing < MaxCensorTiming):
+        timing = MaxCensorTiming
+    return(timing/DivCensorTiming)
+
 def thTimer():
     distance = tof.get_distance()
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -32,17 +39,16 @@ def thTimer():
             temp = b"%d_mm" % (distance)
         else:
             temp = b"MISS"
-
+        
         s.sendall(temp)
         data = s.recv(1024)
         print(repr(data))
+    time.sleep(getTiming())
+    t = threading.Timer(Interval, thTimer)
+    t.start
 
 def main():
     tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
-    timing = tof.get_timing()
-    if(timing < MaxCensorTiming):
-        timing = MaxCensorTiming
-    
     t = threading.Timer(Interval, thTimer)
     t.start
 
