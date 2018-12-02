@@ -39,9 +39,9 @@ def thTimer():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOSTNAME, PORT))
         if(distance > 0):
-            temp = b"%d_mm" % (distance)
+            temp = "%d_mm" % (distance)
         else:
-            temp = b"MISS"
+            temp = "MISS"
         
         s.sendall(temp)
         print(temp)
