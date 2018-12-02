@@ -41,15 +41,14 @@ def thTimer():
             temp = b"MISS"
         
         s.sendall(temp)
-        data = s.recv(1024)
-        print(thTimer)
-        print(repr(data))
-#    time.sleep(getTiming())
+        print(temp)
+        print(repr(temp))
+    #time.sleep(getTiming())
     t = threading.Timer(Interval, thTimer)
     t.start()
 
 def main():
-#    tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
+    #tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
     t = threading.Timer(Interval, thTimer)
     t.start()
 

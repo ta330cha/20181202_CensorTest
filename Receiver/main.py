@@ -27,12 +27,7 @@ def main():
         temp = True
         while temp:
             data = conn.recv(1024)
-            if not data:
-                break
-            else:
-                print('data:{}, addr:{}'.format(data,addr))
-                conn.sendall(b'Received: ' + data)
-                temp = False
+            print('data:{}, addr:{}'.format(data,addr))
 
 if __name__ == '__main__':
     main()
