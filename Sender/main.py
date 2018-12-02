@@ -8,7 +8,7 @@ import socket
 import sys
 import time
 import threading
-import VL53L0X #Package for Peripheral devices
+#import VL53L0X #Package for Peripheral devices
 
 #Instance for Censor
 # tof = VL53L0X.VL53L0X()
