@@ -22,7 +22,6 @@ CLIENTNUM = 1
 #Settings for Timer
 Interval = 1
 MaxRepeat = 10
-Ct = 0
 
 def thTimer():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
