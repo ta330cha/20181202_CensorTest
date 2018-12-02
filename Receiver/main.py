@@ -6,6 +6,7 @@
 #Packages
 import socket
 import time
+import re
 
 #Threads
 import ConnClient
@@ -29,6 +30,7 @@ def thTimer():
         s.listen(CLIENTNUM)
         conn, addr = s.accept()
         data = conn.recv(1024)
+        data = float(data.decode())
         print('data:{}, addr:{}'.format(data,addr))
         t = threading.Timer(Interval, thTimer)
         t.start()

@@ -40,19 +40,18 @@ if Raspi:
         return(timing/DivCensorTiming)
 
 def initTimer():
-    timing = 1 # getTiming()
+    timing = Interval # getTiming()
     t = threading.Timer(timing, thTimer)
     t.start()
 
-def thTimer(timing):
+def thTimer():
     distance = 100 # tof.get_distance()
-
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOSTNAME, PORT))
         if(distance > 0):
-            temp = b"%d_mm" % (distance)
+            temp = b"%d" % (distance)
         else:
-            temp = b"MISS"
+            temp = b"Miss"
         s.sendall(temp)
         print(temp)
     initTimer()
