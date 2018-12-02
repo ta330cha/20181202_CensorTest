@@ -9,7 +9,7 @@ import sys
 import time
 
 #Package for Peripheral devices
-Raspi = False
+Raspi = True
 if Raspi:
     import VL53L0X 
 
@@ -45,7 +45,7 @@ def initTimer():
     t.start()
 
 def thTimer():
-    distance = 100 # tof.get_distance()
+    distance = tof.get_distance()
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOSTNAME, PORT))
         if(distance > 0):
@@ -57,7 +57,7 @@ def thTimer():
     initTimer()
 
 def main():
-    #tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
+    tof.start_ranging(VL53L0X.VL53L0X_BEST_ACCURACY_MODE)
     initTimer()
 
 if __name__ == '__main__':
